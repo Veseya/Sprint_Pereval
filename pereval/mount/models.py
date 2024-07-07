@@ -1,6 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
-from django.core.files import File
 
 
 class Users(models.Model):
@@ -26,46 +24,44 @@ class Pereval(models.Model):
     ACCEPTED = 'AC'
     REJECTED = 'RJ'
     STATUS_CHOICES = (
-        ('NW', 'Создан'),
-        ('PN', 'На проверке'),
-        ('AC', 'Принят'),
-        ('RJ', 'Отклонен'),
+        ('NW', 'new'),
+        ('PN', 'pending'),
+        ('AC', 'accepted'),
+        ('RJ', 'rejected'),
     )
 
     beauty_title = models.CharField(max_length=128)
     title = models.CharField(max_length=128)
     other_titles = models.CharField(max_length=128)
-    connect = models.CharField(max_length=128)
+    connect = models.CharField(max_length=128, blank=True)
     add_time = models.DateTimeField(auto_now_add=True)
     coord_id = models.OneToOneField('Coords', on_delete=models.CASCADE)
-    tourist_id = models.ForeignKey(Users,on_delete=models.CASCADE)
-    status = models.CharField(max_length=2, choices=STATUS_CHOICES, default=NEW)
+    tourist_id = models.ForeignKey(Users, on_delete=models.CASCADE)
+    status = models.CharField(max_length=8, choices=STATUS_CHOICES, default=NEW)
     level = models.ForeignKey('Level', on_delete=models.CASCADE)
 
 
 class Level(models.Model):
-    winter = '4A'
-    spring = '2A'
-    summer = '1A'
-    autumn = '3A'
 
-    LEVEL_CHOICES = (
-        ('4A', 'winter'),
-        ('2A', 'spring'),
-        ('1A', 'summer'),
-        ('3A', 'autumn'),
+    DIFFICULTY_LEVEL = (
+        ('1A', '1A'),
+        ('1Б', '1Б'),
+        ('2A', '2A'),
+        ('2Б', '2Б'),
+        ('3A', '3A'),
+        ('3Б', '3Б')
     )
-    winter_lev = models.CharField(max_length=2, choices=LEVEL_CHOICES, default=winter)
-    spring_lev = models.CharField(max_length=2, choices=LEVEL_CHOICES, default=winter)
-    summer_lev = models.CharField(max_length=2, choices=LEVEL_CHOICES, default=winter)
-    autumn_lev = models.CharField(max_length=2, choices=LEVEL_CHOICES, default=winter)
+
+    winter_lev = models.CharField(max_length=2, choices=DIFFICULTY_LEVEL)
+    spring_lev = models.CharField(max_length=2, choices=DIFFICULTY_LEVEL)
+    summer_lev = models.CharField(max_length=2, choices=DIFFICULTY_LEVEL)
+    autumn_lev = models.CharField(max_length=2, choices=DIFFICULTY_LEVEL)
 
 
 class Images(models.Model):
     image = models.ImageField(upload_to='static/images')
-    title = models.CharField(max_length=128)
+    title = models.CharField(max_length=100)
     pereval_id = models.ForeignKey(Pereval, on_delete=models.CASCADE, related_name='images')
 
     def __str__(self):
         return self.title
-

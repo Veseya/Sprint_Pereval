@@ -22,6 +22,7 @@ from mount.views import SubmitData, UsersViewset
 
 router = routers.DefaultRouter()
 router.register(r'Pereval', SubmitData, basename='pereval')
+router.register(r'User', UsersViewset, basename='user')
 
 
 urlpatterns = [

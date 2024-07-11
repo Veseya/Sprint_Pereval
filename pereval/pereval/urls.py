@@ -19,13 +19,16 @@ from django.urls import include, path
 from django.contrib import admin
 from rest_framework import routers
 from mount.views import SubmitData, UsersViewset
+from .yasg import urlpatterns as doc_urls
 
 router = routers.DefaultRouter()
 router.register(r'Pereval', SubmitData, basename='pereval')
-router.register(r'User', UsersViewset, basename='user')
+# router.register(r'User', UsersViewset, basename='user')
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
 ]
+
+urlpatterns += doc_urls

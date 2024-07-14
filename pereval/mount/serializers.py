@@ -6,7 +6,7 @@ from drf_writable_nested import WritableNestedModelSerializer
 class UsersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Users
-        fields = "__all__"
+        fields = ['email', 'last_name', 'first_name', 'patronymic', 'phone']
 
 
 class CoordsSerializer(serializers.ModelSerializer):

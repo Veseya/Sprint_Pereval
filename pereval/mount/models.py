@@ -19,16 +19,16 @@ class Coords(models.Model):
 
 
 class Pereval(models.Model):
-    NEW = 'NW'
-    PENDING = 'PN'
-    ACCEPTED = 'AC'
-    REJECTED = 'RJ'
-    STATUS_CHOICES = (
-        ('NW', 'new'),
-        ('PN', 'pending'),
-        ('AC', 'accepted'),
-        ('RJ', 'rejected'),
-    )
+    # NEW = 'NW'
+    # PENDING = 'PN'
+    # ACCEPTED = 'AC'
+    # REJECTED = 'RJ'
+    STATUS_CHOICES = [
+        ('NEW', 'new'),
+        ('PENDING', 'pending'),
+        ('ACCEPTED', 'accepted'),
+        ('REJECTED', 'rejected'),
+    ]
 
     beauty_title = models.CharField(max_length=128)
     title = models.CharField(max_length=128)
@@ -37,7 +37,7 @@ class Pereval(models.Model):
     add_time = models.DateTimeField(auto_now_add=True)
     coord_id = models.OneToOneField('Coords', on_delete=models.CASCADE)
     tourist_id = models.ForeignKey(Users, on_delete=models.CASCADE)
-    status = models.CharField(max_length=8, choices=STATUS_CHOICES, default=NEW)
+    status = models.CharField(max_length=8, choices=STATUS_CHOICES, default='NEW')
     level = models.ForeignKey('Level', on_delete=models.CASCADE)
 
 

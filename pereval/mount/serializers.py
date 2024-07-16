@@ -1,23 +1,24 @@
 from rest_framework import serializers
 from .models import *
+from drf_writable_nested import WritableNestedModelSerializer
 
 
 class UsersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Users
-        fields = "__all__"
+        fields = ['email', 'last_name', 'first_name', 'patronymic', 'phone']
 
 
 class CoordsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Coords
-        fields = "__all__"
+        fields = ['latitude', 'longitude', 'height']
 
 
 class LevelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Level
-        fields = "__all__"
+        fields = ['summer_lev', 'autumn_lev', 'winter_lev', 'spring_lev']
 
 
 class ImagesSerializer(serializers.ModelSerializer):
@@ -28,17 +29,18 @@ class ImagesSerializer(serializers.ModelSerializer):
         fields = ['image', 'title']
 
 
-class PerevalSerializer(serializers.ModelSerializer):
+class PerevalSerializer(WritableNestedModelSerializer):
     tourist_id = UsersSerializer()
     coord_id = CoordsSerializer()
     level = LevelSerializer()
     images = ImagesSerializer(many=True)
     add_time = serializers.DateTimeField(format='%d-%m-%Y %H:%M:%S', read_only=True)
+    status = serializers.CharField(read_only=True)
 
     class Meta:
         model = Pereval
-        fields = ['id', 'beauty_title', 'title', 'other_titles', 'connect', 'add_time', 'tourist_id',
-                  'coord_id', 'level', 'images']
+        fields = ['id', 'status', 'beauty_title', 'title', 'other_titles', 'connect', 'add_time',
+                  'tourist_id', 'coord_id', 'level', 'images']
 
     def create(self, validated_data, **kwargs):
         tourist_id = validated_data.pop('tourist_id')

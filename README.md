@@ -111,4 +111,12 @@ GET /Pereval/?user_id__email=<email>
 ***
 
 
+***Проект опубликован на хостинге pythonanywhere.com***
+
+*API **Pereval**: https://veseya.pythonanywhere.com/Pereval/*<br/>
+*Документация **swagger**: https://veseya.pythonanywhere.com/swagger/<br/>*
+*Документация **redoc**: https://veseya.pythonanywhere.com/redoc/*
+
+
+
 

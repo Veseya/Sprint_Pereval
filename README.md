@@ -116,6 +116,12 @@ GET /Pereval/?user_id__email=<email>
 *API **Pereval**: https://veseya.pythonanywhere.com/Pereval/*<br/>
 *Документация **swagger**: https://veseya.pythonanywhere.com/swagger/<br/>*
 *Документация **redoc**: https://veseya.pythonanywhere.com/redoc/*
+***
+
+***Отчет о покрытии тестами:***
+
+![14-07-24](https://github.com/user-attachments/assets/75648fa0-62ca-42a4-9872-afcf62e5a439)
+
 
 
 
